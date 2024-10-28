@@ -12,12 +12,29 @@ BOT_NAME = "divanpars"
 SPIDER_MODULES = ["divanpars.spiders"]
 NEWSPIDER_MODULE = "divanpars.spiders"
 
+# Используем User-Agent, чтобы имитировать запросы от обычного браузера
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
 
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "divanpars (+http://www.yourdomain.com)"
+# Отключаем соблюдение правил robots.txt, чтобы игнорировать ограничения сайта
+ROBOTSTXT_OBEY = False
 
-# Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+# Устанавливаем задержку между запросами, чтобы не нагружать сервер
+DOWNLOAD_DELAY = 2
+
+# Включаем автоматическое регулирование скорости запросов для снижения нагрузки
+AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_START_DELAY = 1
+AUTOTHROTTLE_MAX_DELAY = 10
+AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0  # Среднее количество запросов на один сервер
+AUTOTHROTTLE_DEBUG = False
+
+# Включаем кэширование HTTP, чтобы уменьшить количество запросов к сайту
+HTTPCACHE_ENABLED = True
+HTTPCACHE_EXPIRATION_SECS = 0
+HTTPCACHE_DIR = "httpcache"
+HTTPCACHE_IGNORE_HTTP_CODES = [403, 500, 502, 503, 504]
+HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
+
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
